@@ -1,45 +1,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 96" shape-rendering="crispEdges">
   <defs>
-    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#92918a"/><stop offset=".48" stop-color="#565956"/><stop offset="1" stop-color="#292d2c"/></linearGradient>
-    <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4c504e"/><stop offset="1" stop-color="#202322"/></linearGradient>
+    <linearGradient id="iron" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#858983"/><stop offset=".38" stop-color="#555b57"/><stop offset="1" stop-color="#242927"/></linearGradient>
+    <linearGradient id="armor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#686e68"/><stop offset="1" stop-color="#303532"/></linearGradient>
   </defs>
-  <!-- antenna and rear pack -->
-  <path d="M18 12V4h3v8h4v4h-7z" fill="#292d2c" stroke="#101211" stroke-width="1"/>
-  <path d="M12 25h8v27h-8z" fill="#292d2c" stroke="#111312" stroke-width="2"/>
-  <path d="M13 29h5v5h-5zM13 40h5v4h-5z" fill="#7a4029"/>
-  <!-- head -->
-  <path d="M18 12h28l7 7v25l-7 7H18l-5-6V19z" fill="url(#steel)" stroke="#171a19" stroke-width="3"/>
-  <path d="M20 15h23l5 5v19l-5 5H19l-3-5V20z" fill="#6e716c"/>
-  <path d="M36 17h10l4 4v19l-4 4H36z" fill="#171b1a"/>
-  <path d="M40 26h5v9h-5z" fill="#e8e8de"/>
-  <path d="M41 28h2v5h-2z" fill="#fff8d7"/>
-  <path d="M17 21h4v3h-4zM20 17h6v2h-6zM18 41h6v3h-6z" fill="#7a4029"/>
-  <!-- side circular ear -->
-  <circle cx="20" cy="31" r="7" fill="#292d2c" stroke="#171a19" stroke-width="2"/>
-  <circle cx="20" cy="31" r="4" fill="#555954" stroke="#858780" stroke-width="1"/>
-  <circle cx="20" cy="31" r="1.5" fill="#202322"/>
-  <!-- neck -->
-  <path d="M27 49h10v6H27z" fill="#252927"/>
-  <!-- torso -->
-  <path d="M22 53l6-3h10l7 4 4 15-5 8H22l-5-8z" fill="url(#steel)" stroke="#171a19" stroke-width="2"/>
-  <path d="M27 55h11l3 12H24z" fill="#454a47"/>
-  <path d="M29 58h7v5h-7z" fill="#999a90"/>
-  <path d="M31 59h3v3h-3z" fill="#7a4029"/>
-  <path d="M22 69h20v4H22z" fill="#292d2c"/>
-  <!-- arms with joints -->
-  <path d="M20 55l-6 4-3 13 5 3 5-12 4-3z" fill="#5b5e58" stroke="#191c1b" stroke-width="2"/>
-  <circle cx="14" cy="61" r="3" fill="#898a80" stroke="#202322" stroke-width="1"/>
-  <path d="M43 56l6 3 4 11-5 4-5-10-3-3z" fill="#5b5e58" stroke="#191c1b" stroke-width="2"/>
-  <circle cx="49" cy="61" r="3" fill="#898a80" stroke="#202322" stroke-width="1"/>
-  <path d="M10 71h7v6h-7zM46 71h8v6h-8z" fill="#353936" stroke="#151716" stroke-width="1"/>
-  <!-- legs -->
-  <path d="M23 75h8v10l-3 4h-7l1-5z" fill="#4b504c" stroke="#171a19" stroke-width="2"/>
-  <path d="M35 75h8l1 10 4 4h-9l-4-5z" fill="#5d6059" stroke="#171a19" stroke-width="2"/>
-  <circle cx="27" cy="82" r="2" fill="#85877d"/><circle cx="40" cy="82" r="2" fill="#85877d"/>
-  <!-- heavy boots -->
-  <path d="M20 86h8l2 4 5 2v3H17v-4z" fill="#303431" stroke="#111312" stroke-width="2"/>
-  <path d="M39 86h7l4 5 5 1v3H37v-4z" fill="#3a3d38" stroke="#111312" stroke-width="2"/>
-  <path d="M19 92h14v2H18zM39 92h16v2H38z" fill="#85877d"/>
-  <!-- scratches -->
-  <path d="M24 19l3 2-2 1zM44 47l3-2 1 2zM25 64h3v1h-3zM40 70h3v1h-3z" fill="#a56b4b"/>
+  <!-- antenna and battered sensor mast -->
+  <path d="M24 14V5h4V2h4v7h-4v5z" fill="#343936" stroke="#111513" stroke-width="2"/>
+  <rect x="28" y="4" width="4" height="3" fill="#9a6546"/>
+  <!-- rear salvage pack -->
+  <path d="M12 30h9v27h-8l-3-5V36z" fill="#252b29" stroke="#111513" stroke-width="2"/>
+  <path d="M12 35h6v5h-6zM13 45h5v3h-5z" fill="#7b4832"/>
+  <path d="M10 51l-4 5 2 8 6-2 2-7z" fill="#414743" stroke="#151917" stroke-width="2"/>
+  <!-- head: asymmetrical industrial shell -->
+  <path d="M20 13h25l7 7v21l-7 7H19l-6-7V22l4-6z" fill="url(#iron)" stroke="#101412" stroke-width="3"/>
+  <path d="M19 17h23l5 5v16l-5 5H19l-3-5V23z" fill="#5c625d"/>
+  <path d="M31 18h12l5 5v15l-5 5H31z" fill="#222825"/>
+  <!-- single narrow luminous optic -->
+  <path d="M36 25h8v10h-8z" fill="#0d1110"/>
+  <path d="M39 27h4v6h-4z" fill="#d7d9cc"/>
+  <path d="M40 28h2v3h-2z" fill="#f4f0d7"/>
+  <path d="M17 20h7v2h-7zM18 40h5v3h-5zM44 17l4 4-2 2-4-4z" fill="#9b5c3b"/>
+  <!-- left rotary ear / bolt -->
+  <circle cx="19" cy="31" r="7" fill="#242a27" stroke="#101412" stroke-width="2"/>
+  <circle cx="19" cy="31" r="4" fill="#6b716a" stroke="#93978b" stroke-width="1"/>
+  <path d="M17 30h4v2h-4z" fill="#252b28"/>
+  <!-- neck and collar -->
+  <path d="M26 47h12v7H26z" fill="#252b28" stroke="#111513" stroke-width="1"/>
+  <path d="M23 51h17l7 5 3 13-6 8H21l-5-8 3-13z" fill="url(#armor)" stroke="#111513" stroke-width="2"/>
+  <!-- chest plate and old serial marking -->
+  <path d="M26 54h12l4 12-5 7H24l-3-7z" fill="#3a403c" stroke="#252a27" stroke-width="1"/>
+  <path d="M27 57h9v6h-9z" fill="#777d73"/>
+  <path d="M29 58h5v3h-5z" fill="#272d29"/>
+  <path d="M28 66h9v2h-9zM25 71h15v3H25z" fill="#1e2421"/>
+  <path d="M37 57h3v2h-3zM23 68h3v2h-3z" fill="#a06140"/>
+  <!-- left arm, exposed joint, clamp hand -->
+  <path d="M19 54l-5 3-5 12 4 5 5-5 5-10z" fill="#505751" stroke="#171c19" stroke-width="2"/>
+  <circle cx="15" cy="60" r="3" fill="#858a80" stroke="#202622" stroke-width="1"/>
+  <path d="M8 69l5 1-1 7-5-1z" fill="#343a36" stroke="#151a17" stroke-width="1"/>
+  <!-- right arm with patched shoulder -->
+  <path d="M43 55l6 3 4 11-4 5-5-5-4-9z" fill="#555c55" stroke="#171c19" stroke-width="2"/>
+  <circle cx="48" cy="60" r="3" fill="#858a80" stroke="#202622" stroke-width="1"/>
+  <path d="M47 69h7v7h-6l-2-3z" fill="#343a36" stroke="#151a17" stroke-width="1"/>
+  <path d="M45 57l4 2-2 4-4-2z" fill="#8b5135"/>
+  <!-- hips -->
+  <path d="M21 75h24l-2 7H23z" fill="#252b28" stroke="#111513" stroke-width="2"/>
+  <rect x="29" y="76" width="7" height="4" fill="#646a62"/>
+  <!-- mismatched legs, visible piston joints -->
+  <path d="M23 80h9v8l-4 4h-7l1-6z" fill="#4a514b" stroke="#141916" stroke-width="2"/>
+  <path d="M36 80h8l2 8 4 4h-9l-5-5z" fill="#62675f" stroke="#141916" stroke-width="2"/>
+  <circle cx="27" cy="86" r="2" fill="#9a9c8d"/><circle cx="41" cy="86" r="2" fill="#9a9c8d"/>
+  <path d="M24 88h4v2h-4zM39 88h4v2h-4z" fill="#252b28"/>
+  <!-- heavy uneven boots -->
+  <path d="M20 90h9l3 3 4 1v2H16v-3z" fill="#2c322e" stroke="#101412" stroke-width="2"/>
+  <path d="M40 90h7l4 4 4 1v1H38v-3z" fill="#383e38" stroke="#101412" stroke-width="2"/>
+  <path d="M18 94h15v1H18zM39 94h15v1H39z" fill="#858a7e"/>
+  <!-- chips, seams and rust streaks -->
+  <path d="M23 18h4v2h-4zM43 43h4v2h-4zM23 61h2v4h-2zM40 69h3v2h-3zM15 37h2v3h-2z" fill="#a56846"/>
+  <path d="M22 24h3v1h-3zM27 49h9v1h-9zM32 72h4v1h-4zM47 64h2v3h-2z" fill="#a4a89b" opacity=".7"/>
 </svg>
