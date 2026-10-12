@@ -7,15 +7,15 @@
   <style>
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
-    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #0e0f10; color: #e8e8de; font-family: 'Trebuchet MS', system-ui, sans-serif; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #0b0d0d; color: #e8e8de; font-family: 'Trebuchet MS', system-ui, sans-serif; }
     body { display: flex; align-items: center; justify-content: center; }
     #game { display: block; width: 100vw; height: 100dvh; image-rendering: pixelated; touch-action: none; }
-    .hud { position: fixed; top: 16px; left: 18px; color: #e8e8de; font-size: 12px; letter-spacing: 3px; text-shadow: 0 2px #000; pointer-events: none; z-index: 2; }
-    .hint { position: fixed; top: 39px; left: 18px; color: #858681; font-size: 11px; letter-spacing: .5px; pointer-events: none; z-index: 2; }
-    .controls { position: fixed; inset: auto 0 18px 0; display: none; justify-content: space-between; padding: 0 18px; pointer-events: none; z-index: 3; }
+    .hud { position: fixed; top: max(16px, env(safe-area-inset-top)); left: 18px; color: #e8e8de; font-size: 12px; letter-spacing: 3px; text-shadow: 0 2px 5px #000, 0 0 12px #000; pointer-events: none; z-index: 2; padding: 8px 10px; border-left: 2px solid #98583a; background: linear-gradient(90deg,#101312d9,transparent); }
+    .hint { position: fixed; top: 55px; left: 28px; color: #b0ada2; font-size: 11px; letter-spacing: .7px; text-shadow: 0 2px 5px #000; pointer-events: none; z-index: 2; }
+    .controls { position: fixed; inset: auto 0 max(22px, env(safe-area-inset-bottom)) 0; display: none; justify-content: space-between; padding: 0 20px; pointer-events: none; z-index: 3; }
     .group { display: flex; gap: 10px; }
-    .control { pointer-events: auto; width: 58px; height: 58px; border: 1px solid #77786f88; border-radius: 4px; background: #1f2120dd; color: #e8e8de; font-size: 24px; display: grid; place-items: center; user-select: none; -webkit-user-select: none; touch-action: none; }
-    .control:active { background: #454b4dcc; }
+    .control { pointer-events: auto; width: 64px; height: 64px; border: 1px solid #9b755e99; border-radius: 7px; background: linear-gradient(145deg,#292b28eF,#111412eF); box-shadow: inset 0 1px #ffffff12, 0 5px 18px #0008; color: #e8e1d5; font-size: 27px; display: grid; place-items: center; user-select: none; -webkit-user-select: none; touch-action: none; }
+    .control:active { background: #65432feF; border-color: #c58a62; transform: translateY(1px); }
     .title-screen { position: fixed; inset: 0; z-index: 9999; pointer-events: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; background: linear-gradient(180deg, #0e0f10ee, #171918df 60%, #0e0f10f5); }
     .title-mark { color: #e8e8de; font-size: clamp(42px, 10vw, 78px); font-weight: 900; letter-spacing: .16em; line-height: .95; text-shadow: 0 4px 0 #000; }
     .title-mark span { display: block; margin-top: 12px; color: #7a4029; font-size: .34em; letter-spacing: .72em; padding-left: .72em; }
@@ -58,7 +58,7 @@
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(innerWidth * dpr);
     canvas.height = Math.round(innerHeight * dpr);
-    scale = Math.min(canvas.width / W, canvas.height / H);
+    scale = Math.max(canvas.width / W, canvas.height / H);
     ox = (canvas.width - W * scale) / 2;
     oy = (canvas.height - H * scale) / 2;
   }
@@ -106,27 +106,48 @@
   }
 
   function drawBackground() {
+    // Céu frio e enfumaçado, com uma luz discreta no horizonte.
     const g = ctx.createLinearGradient(0,0,0,H);
-    g.addColorStop(0,'#15191c'); g.addColorStop(1,'#292d2e');
+    g.addColorStop(0,'#0c1012'); g.addColorStop(.48,'#1b2021'); g.addColorStop(1,'#343735');
     ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-    stars.forEach((s,i)=>rect((s.x-camera*.12+480)%480,s.y,s.s===1?1:2,1,'#626a6b'));
-    // silhueta de máquinas e sucata
-    for(let i=0;i<9;i++){
-      const x=((i*71-camera*.22)%570+570)%570-40;
-      rect(x,133,25,89,'#202527'); rect(x+5,118+(i%3)*7,13,18,'#202527');
-      rect(x+3,145,4,22,'#343a3b'); rect(x+18,159,3,13,'#343a3b');
+    // Bruma em camadas para dar profundidade ao ferro-velho.
+    ctx.fillStyle='#92958a0a'; ctx.fillRect(0,105,W,50);
+    ctx.fillStyle='#a5a18d0b'; ctx.fillRect(0,155,W,33);
+    stars.forEach((s,i)=>rect((s.x-camera*.12+480)%480,s.y,s.s===1?1:2,1,'#777a73'));
+    // Silhuetas industriais distantes.
+    for(let i=0;i<10;i++){
+      const x=((i*67-camera*.16)%590+590)%590-45;
+      const top=116+(i%4)*8;
+      rect(x,top,27,222-top,'#171c1c');
+      rect(x+5,top-12,15,15,'#171c1c');
+      rect(x+2,top+16,3,29,'#292f2e');
+      rect(x+21,top+27,2,19,'#292f2e');
+      if(i%3===0){ rect(x+7,top+30,2,9,'#80513a'); rect(x+10,top+30,1,9,'#b17b4f'); }
     }
-    // lua enevoada
-    ctx.fillStyle='#8b929055'; ctx.beginPath(); ctx.arc(375,54,19,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle='#b4b9b755'; ctx.beginPath(); ctx.arc(370,50,14,0,Math.PI*2); ctx.fill();
-    // chão
-    rect(0,222,W,48,'#373b3c'); rect(0,222,W,2,'#747b7b');
+    // Guindaste e cabos em silhueta.
+    rect(18,91,2,82,'#252a29'); rect(18,91,83,2,'#252a29'); rect(96,91,2,38,'#252a29');
+    rect(77,129,2,13,'#554332'); rect(73,140,10,3,'#554332');
+    // Lua enevoada com halo.
+    ctx.fillStyle='#c2c1ad0d'; ctx.beginPath(); ctx.arc(375,54,29,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#9da39c36'; ctx.beginPath(); ctx.arc(375,54,19,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#c2c7b968'; ctx.beginPath(); ctx.arc(370,50,14,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#727974'; ctx.beginPath(); ctx.arc(365,46,10,0,Math.PI*2); ctx.fill();
+    // Reflexos ferrugem em pontos de sucata.
+    rect(34,171,15,2,'#65412f'); rect(36,173,2,5,'#98603e');
+    rect(302,162,2,12,'#8b5a3c'); rect(305,170,9,2,'#67412e');
+    // Chão industrial em camadas.
+    rect(0,222,W,48,'#303533'); rect(0,222,W,2,'#7c8178');
+    rect(0,226,W,2,'#424843'); rect(0,244,W,2,'#272c2a');
     debris.forEach((d,i)=>{
       const x=((d.x-camera*.65)%510+510)%510-15;
-      rect(x,222-d.h,d.w,d.h,'#292e30'); rect(x+2,222-d.h,d.w-4,2,'#4d5556');
+      rect(x,222-d.h,d.w,d.h,'#202624');
+      rect(x+1,222-d.h,d.w-2,2,'#51574f');
+      if(i%4===0) rect(x+3,222-d.h+4,2,2,'#865238');
     });
-    // pequenas luzes distantes
-    rect(92,175,2,3,'#9b8b69'); rect(332,147,2,3,'#9b8b69');
+    // Vinheta sutil nas bordas.
+    const v=ctx.createRadialGradient(W/2,H/2,45,W/2,H/2,245);
+    v.addColorStop(0,'#00000000'); v.addColorStop(1,'#05070755');
+    ctx.fillStyle=v; ctx.fillRect(0,0,W,H);
   }
 
   function drawPlatforms() {
