@@ -16,12 +16,12 @@
     .group { display: flex; gap: 10px; }
     .control { pointer-events: auto; width: 58px; height: 58px; border: 1px solid #77786f88; border-radius: 4px; background: #1f2120dd; color: #e8e8de; font-size: 24px; display: grid; place-items: center; user-select: none; -webkit-user-select: none; touch-action: none; }
     .control:active { background: #454b4dcc; }
-    .title-screen { position: fixed; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; background: linear-gradient(180deg, #0e0f10ee, #171918df 60%, #0e0f10f5); }
+    .title-screen { position: fixed; inset: 0; z-index: 9999; pointer-events: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; background: linear-gradient(180deg, #0e0f10ee, #171918df 60%, #0e0f10f5); }
     .title-mark { color: #e8e8de; font-size: clamp(42px, 10vw, 78px); font-weight: 900; letter-spacing: .16em; line-height: .95; text-shadow: 0 4px 0 #000; }
     .title-mark span { display: block; margin-top: 12px; color: #7a4029; font-size: .34em; letter-spacing: .72em; padding-left: .72em; }
     .title-kicker { margin: 32px 0 18px; color: #a8a99f; font-size: 10px; letter-spacing: .22em; }
     .title-rule { width: min(340px, 75vw); height: 1px; background: linear-gradient(90deg, transparent, #7a4029, transparent); margin-bottom: 24px; }
-    .start-button { width: min(340px, 82vw); padding: 16px 18px; border: 1px solid #665044; border-radius: 2px; background: #202220; color: #e8e8de; font-size: 12px; letter-spacing: .12em; cursor: pointer; transition: background .2s, border-color .2s; }
+    .start-button { position: relative; z-index: 10000; pointer-events: auto; touch-action: manipulation; -webkit-tap-highlight-color: transparent; width: min(340px, 82vw); padding: 16px 18px; border: 1px solid #665044; border-radius: 2px; background: #202220; color: #e8e8de; font-size: 12px; letter-spacing: .12em; cursor: pointer; transition: background .2s, border-color .2s; }
     .start-button:hover, .start-button:focus { background: #34322d; border-color: #9a6347; outline: none; }
     .title-foot { margin-top: 22px; color: #77786f; font-size: 9px; letter-spacing: .1em; }
     @media (min-width: 800px) { .controls { opacity: .72; } }
@@ -181,11 +181,18 @@
     if(['ArrowLeft','a','A'].includes(e.key))keys.left=false;
     if(['ArrowRight','d','D'].includes(e.key))keys.right=false;
   });
-  document.getElementById('startGame').addEventListener('click', () => {
+  function startAdventure(e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
     started = true;
-    document.getElementById('titleScreen').style.display = 'none';
-    document.querySelector('.controls').style.display = 'flex';
-  });
+    const title = document.getElementById('titleScreen');
+    const controls = document.querySelector('.controls');
+    if (title) title.style.display = 'none';
+    if (controls) controls.style.display = 'flex';
+  }
+  const startButton = document.getElementById('startGame');
+  startButton.addEventListener('click', startAdventure);
+  startButton.addEventListener('pointerup', startAdventure);
+  startButton.addEventListener('touchend', startAdventure, { passive: false });
 
   loop(); render();
 })();
