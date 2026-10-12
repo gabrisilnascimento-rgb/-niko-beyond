@@ -89,11 +89,11 @@
     if (nikoSpriteReady) {
       ctx.save();
       if (player.facing < 0) {
-        ctx.translate(x + 16, y - 9);
+        ctx.translate(x + 16, y - 24);
         ctx.scale(-1,1);
-        ctx.drawImage(nikoSprite,0,0,32,38);
+        ctx.drawImage(nikoSprite,0,0,32,48);
       } else {
-        ctx.drawImage(nikoSprite,x-8,y-9,32,38);
+        ctx.drawImage(nikoSprite,x-9,y-24,32,48);
       }
       ctx.restore();
     } else {
