@@ -77,26 +77,32 @@
   const debris = Array.from({length:18},(_,i)=>({x:i*31+8,h:5+(i*13)%19,w:8+(i*7)%18}));
 
   function rect(x,y,w,h,c) { ctx.fillStyle=c; ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h)); }
+  const nikoSprite = new Image();
+  nikoSprite.src = './assets/niko.svg';
+  let nikoSpriteReady = false;
+  nikoSprite.onload = () => { nikoSpriteReady = true; };
+
   function drawNiko() {
     const x = Math.round(player.x), y = Math.round(player.y);
-    // sombra
-    rect(x-3,y+player.h,20,3,'#090a0b');
-    // pernas e pés
-    rect(x+3,y+16,3,6,'#555c5e'); rect(x+9,y+16,3,6,'#555c5e');
-    rect(x+1,y+21,5,3,'#858b8b'); rect(x+8,y+21,5,3,'#858b8b');
-    // braços
-    rect(x,y+8,3,8,'#697173'); rect(x+12,y+8,3,8,'#697173');
-    rect(x-1,y+14,4,3,'#858b8b'); rect(x+12,y+14,4,3,'#858b8b');
-    // corpo de metal gasto
-    rect(x+3,y+8,9,9,'#737b7d'); rect(x+4,y+9,7,7,'#4d5557');
-    rect(x+6,y+11,3,3,'#a3a8a7'); rect(x+7,y+12,1,1,'#252a2b');
-    // cabeça
-    rect(x+2,y,11,9,'#8a9191'); rect(x+3,y+1,9,7,'#60686a');
-    rect(x+4,y+3,7,3,'#171b1c');
-    rect(x+(player.facing>0?8:4),y+4,2,2,'#d7e0df');
-    rect(x+4,y+7,6,1,'#a6acab');
-    // pequenas marcas de ferrugem
-    rect(x+3,y+2,2,1,'#79594b'); rect(x+10,y+7,2,1,'#79594b');
+    // sombra sob os pés
+    rect(x-5,y+player.h+1,25,3,'#090a0b');
+    if (nikoSpriteReady) {
+      ctx.save();
+      if (player.facing < 0) {
+        ctx.translate(x + 16, y - 9);
+        ctx.scale(-1,1);
+        ctx.drawImage(nikoSprite,0,0,32,38);
+      } else {
+        ctx.drawImage(nikoSprite,x-8,y-9,32,38);
+      }
+      ctx.restore();
+    } else {
+      rect(x+2,y,11,9,'#737b7d');
+      rect(x+4,y+3,7,3,'#171b1c');
+      rect(x+8,y+4,2,2,'#e8e8de');
+      rect(x+3,y+9,9,8,'#4d5557');
+      rect(x+3,y+17,3,5,'#555c5e'); rect(x+9,y+17,3,5,'#555c5e');
+    }
   }
 
   function drawBackground() {
